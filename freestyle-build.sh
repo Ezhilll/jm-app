@@ -1,1 +1,1 @@
-mvn --version
+maven --version
