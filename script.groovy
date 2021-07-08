@@ -10,7 +10,7 @@ def buildImage() {
         sh "echo $PASS | docker login -u $USER --password-stdin"
         sh 'docker push poornambiga/javaapp:jma1.0'
     }
-} :jma1.0
+}
 
 def deployApp() {
     echo 'deploying the application...'
