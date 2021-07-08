@@ -1,0 +1,47 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+    parameters{
+        string(name:"Test",defaultValue:"sample value",description:"")
+        choice(name:"versionchoice",choices:["1.0","1.1","1.2"],description:"")
+        booleanParam(name:"check",defaultValue:true,description:"")
+        }
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    echo "Building the application..."
+                }
+            }
+        }
+        stage('test') {
+            when{
+                expression{
+                    params.check == true
+                }
+            }
+            steps {
+                script {
+                    echo "Testing the application..."
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+            input{
+                message "Select the Environment"
+                ok "Okay"
+                parameters{
+                    choice(name:ENV,choices:["dev","test","Prod"],description:"")
+                }
+            }
+                script {
+                    echo "Deploying the application..."
+                    echo "Version from Parameter ${params.versionchoice}"
+                    echo "Deploying in Environment ${ENV}"
+                }
+            }
+        }
+    }
+}
