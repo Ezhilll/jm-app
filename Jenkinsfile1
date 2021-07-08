@@ -1,0 +1,44 @@
+pipeline {
+    environment{
+        VERSION = "1.1.0"
+    }
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    echo "Building the application..."
+                    echo "Building version ${VERSION}"
+                }
+            }
+        }
+        stage('test') {
+            steps {
+                script {
+                    echo "Testing the application..."
+                }
+            }
+        }
+        stage('deploy') {
+            when{
+            BRANCH_NAME == "MASTER"
+            }
+            steps {
+                script {
+                    echo "Deploying the application..."
+                }
+            }
+        }
+    }
+    post{
+        always{
+            echo "Build completed"
+        }
+        success{
+            echo "Build Succeeded"
+        }
+        failure{
+            echo "Build Failed"
+        }
+    }
+}
