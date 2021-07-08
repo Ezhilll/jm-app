@@ -39,7 +39,7 @@ pipeline {
                 script {
                     echo "Deploying the application..."
                     echo "Version from Parameter ${params.versionchoice}"
-                    echo "Deploying in Environment ${params.ENV}"
+                    echo "Deploying in Environment ${ENV}"
                 }
             }
         }
