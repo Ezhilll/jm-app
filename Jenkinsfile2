@@ -1,0 +1,48 @@
+pipeline {
+    environment{
+        VERSION = "1.1.0"
+        dockerCredentials = credentials('6ea27612-6a27-4815-90da-8cf2055a12bf')
+    }
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                script {
+                    echo "Building the application..."
+                    echo "Building version ${VERSION}"
+                }
+            }
+        }
+        stage('test') {
+            steps {
+                script {
+                    echo "Testing the application..."
+                }
+            }
+        }
+        stage('deploy') {
+            when{
+                expression{
+                BRANCH_NAME == "master"
+                }
+            }
+            steps {
+                script {
+                    echo "Deploying the application..."
+                    echo "dockerCredentials"
+                }
+            }
+        }
+    }
+    post{
+        always{
+            echo "Build completed"
+        }
+        success{
+            echo "Build Succeeded"
+        }
+        failure{
+            echo "Build Failed"
+        }
+    }
+}
