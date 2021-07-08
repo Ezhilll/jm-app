@@ -33,7 +33,7 @@ pipeline {
                 message "Select the Environment"
                 ok "Okay"
                 parameters{
-                    choice(name:ENV,choices:["dev","test","Prod"],description:"")
+                    choice(name:"ENV",choices:["dev","test","Prod"],description:"")
                 }
             }
                 script {
