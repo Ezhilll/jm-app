@@ -3,6 +3,10 @@ pipeline {
         VERSION = "1.1.0"
         dockerCredentials = credentials('6ea27612-6a27-4815-90da-8cf2055a12bf')
     }
+    tools{
+        maven 'Maven-3.8.1'
+        }
+    
     agent any
     stages {
         stage('build') {
@@ -10,6 +14,7 @@ pipeline {
                 script {
                     echo "Building the application..."
                     echo "Building version ${VERSION}"
+                    sh 'mvn --version'
                 }
             }
         }
