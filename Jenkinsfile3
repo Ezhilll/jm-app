@@ -3,7 +3,6 @@
 pipeline {
     agent any
     parameters{
-        string(name:"Test",defaultValue:"sample value",description:"")
         choice(name:"versionchoice",choices:["1.0","1.1","1.2"],description:"")
         booleanParam(name:"check",defaultValue:true,description:"")
         }
